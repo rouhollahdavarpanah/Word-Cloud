@@ -1,0 +1,37 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import random
+import matplotlib
+from wordcloud import WordCloud
+
+# Define words and their approximate frequency
+words = [
+    "Hydrology", "Water", "Management", "Research", "Hydrological Modeling", "Climate Change", "SWAT+", "Engineering",
+    "Environmental", "Agricultural", "Simulation", "Analysis", "Assessment", "Hydrology", "Crop Modeling",
+    "Data", "Optimization", "AquaCrop", "University", "SWAT", "Remote Sensing", "Hydroinformatics",
+    "Geospatial Analysis", "Irrigation", "Flood", "Drought", "Water Quality", "Land Use Change", "WEAP", "Python", "R",
+    "WEFE Nexus", "Sustainable Development", "Human-Environment Systems", "GIS", "Precision Agriculture",
+]
+
+# Create a word frequency dictionary
+word_frequencies = {word: len(word) * 10 for word in words}
+
+# Generate a random color function
+def random_colors(word, font_size, position, orientation, random_state=None, **kwargs):
+    return "#{:06x}".format(random.randint(0, 0xFFFFFF))  # Random hex color
+
+# Generate the word cloud with random colors
+wordcloud = WordCloud(width=1584, height=396, background_color="white",  
+                      contour_color='black', contour_width=3,
+                      font_path="C:/Windows/Fonts/arial.ttf",  # Ensure the correct font path
+                      random_state=42, prefer_horizontal=0.5, 
+                      color_func=random_colors).generate_from_frequencies(word_frequencies)
+
+# Display the word cloud
+plt.figure(figsize=(16, 4))
+plt.imshow(wordcloud, interpolation="bilinear")
+plt.axis("off")
+plt.show()
+
+# Save the image
+wordcloud.to_file("C:/Users/Soroush/Desktop/LinkedIn_WordCloud_RandomColors5.png")
